@@ -50,7 +50,7 @@ def convert_coordinates(coords):
         coords (tuple): A tuple containing the x and y coordinates.
 
     Returns:
-        tuple: A tuple containing the converted latitude and longitude coordinates.
+        tuple: A tuple containing the converted longitude and latitude coordinates.
     """
     transformer = Transformer.from_crs("epsg:3857", "epsg:4326", always_xy=True)
     return transformer.transform(coords[0], coords[1])
@@ -63,6 +63,7 @@ if __name__ == "__main__":
     raster_path = sys.argv[1]
     corners = get_raster_corners(raster_path)
 
+    print("corner: (longitude, latitude)")
     for corner, coords in corners.items():
-        lat_long = convert_coordinates(coords)
-        print(f"{corner}: {lat_long}")
+        long_lat = convert_coordinates(coords)
+        print(f"{corner}: {long_lat}")
